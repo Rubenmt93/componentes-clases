@@ -1,30 +1,71 @@
 
 import { Component } from "react";
-class Button extends Component{
-render() {
-  console.log('banana')
-  return (
-    <button>
-      Enviar
-    </button>
-  )
-}
+// class Button extends Component{
+//   state={}
+//   constructor(props){
+//     super(props)
+//     console.log('constructor',props)
+//   }
+//   componentDidMount(){
+//     console.log('component did mount')
+//   }
+//   componentDidUpdate(prevProps, prevState){
+//     console.log('Component did update', prevProps,prevState )
+//   }
+//   componentWillUnmount(prevProps, prevState){
+//     console.log('Component will unmount', prevProps,prevState )
+
+//   }
+//   render() {
+//     console.log('Renderizado')
+//     return (
+//       <button onClick={() => {this.setState({prop:1})}}>
+//         Enviar
+//       </button>
+//     )
+//   }
+// }
+class Input extends Component{
+ 
+  render(){
+    return(
+      <input  value={this.props.value}
+              onChange={ this.props.onChange}>
+      </input>
+    )
+  }
 }
 class App extends Component{
-  state={
-    valor:3
+  state= {
+    nombre:'',
+    apellido:''
+  }
+
+  updateValues = (prop,value) => {
+    this.setState({ [prop]:value })
   }
   render (){
-    console.log(this.state);
+    
     return(
-      <div> 
-        <p>Hola Mundo</p>
-        <Button/>
-        <button className={`${this.state.valor}`} 
-                onClick={() => this.setState({valor:1})}>
-          Enviar en App
-        </button> 
-      </div>
+      <p> 
+        Nombre completo: {`${this.state.nombre} ${this.state.apellido}`}
+        <Input value={this.state.nombre}
+               onChange= {e => this.updateValues('nombre', e.target.value)}/>
+        <Input value={this.state.apellido}
+               onChange= {e => this.updateValues('apellido', e.target.value)}/>
+      </p>
+     
+      // <div> 
+      //   <p>Hola Mundo</p>
+      //   {this.state.valor ===3 
+      //   ?<Button chanchito='feliz'/>
+      //   :null}
+        
+      //   <button className={`${this.state.valor}`} 
+      //           onClick={() => this.setState({valor:1})}>
+      //     Enviar en App
+      //   </button> 
+      // </div>
     )
   }
 
